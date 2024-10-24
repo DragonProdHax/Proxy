@@ -15,10 +15,11 @@
             background-color: #282c34;
             color: white;
             font-family: Arial, sans-serif;
+            overflow: hidden; /* Prevent scrolling */
         }
         iframe {
-            width: 80%;
-            height: 80%;
+            width: 100vw; /* Full width */
+            height: 100vh; /* Full height */
             border: none;
         }
         #loading {
@@ -62,7 +63,7 @@
 
     <script>
         document.addEventListener('keydown', function(event) {
-            if (event.key === 'Shift') {
+            if (event.key === 'o') { // Change to 'o' key
                 document.getElementById('loading').style.display = 'block';
                 setTimeout(showButtons, 1000); // Delay to show loading GIF
             }
