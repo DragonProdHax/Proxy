@@ -37,6 +37,14 @@
             height: 80vh;
             border: none;
         }
+        /* Secret menu styles */
+        .secret-menu {
+            display: none; /* Initially hidden */
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #ccc;
+            border: 1px solid #aaa;
+        }
     </style>
 </head>
 <body>
@@ -48,6 +56,13 @@
     </div>
 
     <iframe id="classroomFrame" src="https://edu.google.com/intl/ALL_us/workspace-for-education/classroom/"></iframe>
+
+    <!-- Secret Menu -->
+    <div class="secret-menu" id="secretMenu">
+        <h3>Secret Menu</h3>
+        <p>This is the secret menu content!</p>
+        <!-- Add more options here if needed -->
+    </div>
 
     <script>
         document.addEventListener('keydown', function(event) {
@@ -61,6 +76,13 @@
                 localStorage.setItem('a', '1');
                 alert('Access to Mega Proxy granted!');
             }
+
+            // 'Tab' key to toggle secret menu
+            if (event.key === 'Tab') {
+                event.preventDefault(); // Prevent default tabbing behavior
+                const secretMenu = document.getElementById('secretMenu');
+                secretMenu.style.display = secretMenu.style.display === 'none' ? 'block' : 'none';
+            }
         });
 
         document.getElementById('easyProxy').addEventListener('click', function() {
@@ -69,24 +91,12 @@
                 // Open a new tab with the provided link iframed
                 let newWindow = window.open("about:blank", "_blank");
                 newWindow.document.write(`<iframe src="${url}" style="width:100%; height:100%; border:none;"></iframe>`);
-                // Insert the ads script
-                newWindow.document.write(`
-                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8739942460911283" crossorigin="anonymous"></script>
-                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8739942460911283" data-ad-slot="1339299764" data-ad-format="auto" data-full-width-responsive="true"></ins>
-                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-                `);
             }
         });
 
         document.getElementById('proxy').addEventListener('click', function() {
             let newWindow = window.open("about:blank", "_blank");
             newWindow.document.write('<iframe src="https://www.proxysite.com" style="width:100%; height:100%; border:none;"></iframe>');
-            // Insert the ads script
-            newWindow.document.write(`
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8739942460911283" crossorigin="anonymous"></script>
-                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8739942460911283" data-ad-slot="1339299764" data-ad-format="auto" data-full-width-responsive="true"></ins>
-                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-            `);
         });
 
         document.getElementById('megaProxy').addEventListener('click', function() {
