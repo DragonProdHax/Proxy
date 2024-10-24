@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proxy Classroom</title>
+    <title>Blooket</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -72,7 +72,8 @@
         <button id="megaProxy">Mega Proxy <span class="beta-tag">Beta</span></button>
     </div>
 
-    <iframe id="classroomFrame" src="https://edpuzzle.com/"></iframe>
+    <!-- Placeholder for iframe, set to Blooket URL -->
+    <iframe id="classroomFrame" src="https://blooket.com/"></iframe>
 
     <!-- Notification for restricted access -->
     <div class="notification" id="notification">This is only for premium access!</div>
@@ -85,10 +86,21 @@
         <button id="megaProxySelect">Mega Proxy</button>
     </div>
 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8739942460911283"
-        crossorigin="anonymous"></script>
-    
     <script>
+        // Function to show notification messages
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.opacity = '0'; // Fade out
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                    notification.style.opacity = '1'; // Reset opacity
+                }, 300); // Wait for fade out
+            }, 3000); // Show for 3 seconds
+        }
+
         document.addEventListener('keydown', function(event) {
             // 'O' key to go to the real website
             if (event.key === 'o') {
@@ -98,7 +110,7 @@
             // 'I' key to set localStorage 'a' to 1
             if (event.key === 'i') {
                 localStorage.setItem('a', '1');
-                alert('Access to Mega Proxy granted!');
+                showNotification('Access to Mega Proxy granted!');
             }
 
             // 'Shift' key to toggle secret menu
@@ -117,8 +129,9 @@
 
         document.getElementById('proxy').addEventListener('click', function() {
             let newWindow = window.open("about:blank", "_blank");
-            newWindow.document.write(`<iframe src="https://www.proxysite.com" style="width:100%; height:100%; border:none;"></iframe>`);
-            newWindow.document.write(`<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8739942460911283" crossorigin="anonymous"></script>`);
+            newWindow.document.write('<iframe src="https://www.proxysite.com" style="width:100%; height:100%; border:none;"></iframe>');
+            // Remove ads due to issues loading
+            // newWindow.document.write('<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8739942460911283" crossorigin="anonymous"></script>');
         });
 
         document.getElementById('megaProxy').addEventListener('click', function() {
@@ -126,8 +139,7 @@
             if (access === '1') {
                 window.open("https://flipgrid.cf/", "_blank");
             } else {
-                document.getElementById('notification').style.display = 'block';
-                document.getElementById('notification').textContent = 'You do not have access to Mega Proxy. Press "I" to unlock.';
+                showNotification('You do not have access to Mega Proxy. Press "I" to unlock.');
             }
         });
 
@@ -140,7 +152,8 @@
         document.getElementById('proxySelect').addEventListener('click', function() {
             let newWindow = window.open("about:blank", "_blank");
             newWindow.document.write('<iframe src="https://www.proxysite.com" style="width:100%; height:100%; border:none;"></iframe>');
-            newWindow.document.write(`<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8739942460911283" crossorigin="anonymous"></script>`);
+            // Remove ads due to issues loading
+            // newWindow.document.write('<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8739942460911283" crossorigin="anonymous"></script>');
         });
 
         document.getElementById('megaProxySelect').addEventListener('click', function() {
@@ -148,11 +161,11 @@
             if (access === '1') {
                 window.open("https://flipgrid.cf/", "_blank");
             } else {
-                document.getElementById('notification').style.display = 'block';
-                document.getElementById('notification').textContent = 'You do not have access to Mega Proxy. Press "I" to unlock.';
+                showNotification('You do not have access to Mega Proxy. Press "I" to unlock.');
             }
         });
 
+        // Handle URL input and notifications for restricted sites
         function handleUrlInput(url) {
             if (url.includes('youtube.com')) {
                 showNotification("This is only for premium access!");
@@ -160,20 +173,8 @@
             }
             let newWindow = window.open("about:blank", "_blank");
             newWindow.document.write(`<iframe src="${url}" style="width:100%; height:100%; border:none;"></iframe>`);
-            newWindow.document.write(`<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8739942460911283" crossorigin="anonymous"></script>`);
-        }
-
-        function showNotification(message) {
-            const notification = document.getElementById('notification');
-            notification.textContent = message;
-            notification.style.display = 'block';
-            setTimeout(() => {
-                notification.style.opacity = '0'; // Fade out
-                setTimeout(() => {
-                    notification.style.display = 'none';
-                    notification.style.opacity = '1'; // Reset opacity
-                }, 300); // Wait for fade out
-            }, 3000); // Show for 3 seconds
+            // Remove ads due to issues loading
+            // newWindow.document.write('<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8739942460911283" crossorigin="anonymous"></script>');
         }
     </script>
 
