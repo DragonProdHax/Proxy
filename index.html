@@ -57,11 +57,12 @@
 
     <iframe id="classroomFrame" src="https://edu.google.com/intl/ALL_us/workspace-for-education/classroom/"></iframe>
 
-    <!-- Secret Menu -->
+    <!-- Secret Menu for Proxy Selection -->
     <div class="secret-menu" id="secretMenu">
-        <h3>Secret Menu</h3>
-        <p>This is the secret menu content!</p>
-        <!-- Add more options here if needed -->
+        <h3>Select Proxy</h3>
+        <button id="easyProxySelect">Easy Proxy</button>
+        <button id="proxySelect">Proxy</button>
+        <button id="megaProxySelect">Mega Proxy</button>
     </div>
 
     <script>
@@ -85,10 +86,10 @@
             }
         });
 
+        // Main proxy buttons
         document.getElementById('easyProxy').addEventListener('click', function() {
-            let url = prompt("Enter a URL to access via Easy Proxy:");
+            const url = prompt("Enter a URL to access via Easy Proxy:");
             if (url) {
-                // Open a new tab with the provided link iframed
                 let newWindow = window.open("about:blank", "_blank");
                 newWindow.document.write(`<iframe src="${url}" style="width:100%; height:100%; border:none;"></iframe>`);
             }
@@ -100,6 +101,29 @@
         });
 
         document.getElementById('megaProxy').addEventListener('click', function() {
+            let access = localStorage.getItem('a');
+            if (access === '1') {
+                window.open("https://flipgrid.cf/", "_blank");
+            } else {
+                alert('You do not have access to Mega Proxy. Press "I" to unlock.');
+            }
+        });
+
+        // Secret menu proxy buttons
+        document.getElementById('easyProxySelect').addEventListener('click', function() {
+            const url = prompt("Enter a URL to access via Easy Proxy:");
+            if (url) {
+                let newWindow = window.open("about:blank", "_blank");
+                newWindow.document.write(`<iframe src="${url}" style="width:100%; height:100%; border:none;"></iframe>`);
+            }
+        });
+
+        document.getElementById('proxySelect').addEventListener('click', function() {
+            let newWindow = window.open("about:blank", "_blank");
+            newWindow.document.write('<iframe src="https://www.proxysite.com" style="width:100%; height:100%; border:none;"></iframe>');
+        });
+
+        document.getElementById('megaProxySelect').addEventListener('click', function() {
             let access = localStorage.getItem('a');
             if (access === '1') {
                 window.open("https://flipgrid.cf/", "_blank");
