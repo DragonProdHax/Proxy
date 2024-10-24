@@ -3,126 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proxy Classroom</title>
+    <title>Blooket Proxy</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
-        .top-bar {
             display: flex;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
-            gap: 10px;
-            background-color: #333;
-            padding: 10px;
-        }
-        .top-bar button {
-            padding: 10px 20px;
+            height: 100vh;
+            margin: 0;
+            background-color: #282c34;
             color: white;
-            background-color: #444;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .top-bar button:hover {
-            background-color: #555;
-        }
-        .beta-tag {
-            color: red;
-            font-weight: bold;
-            margin-left: 5px;
+            font-family: Arial, sans-serif;
         }
         iframe {
-            width: 100%;
-            height: 80vh;
+            width: 80%;
+            height: 80%;
             border: none;
+        }
+        #loading {
+            display: none;
             margin-top: 20px;
         }
-        /* Secret menu styles */
-        .secret-menu {
-            display: none; /* Initially hidden */
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #ccc;
-            border: 1px solid #aaa;
+        .button {
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
-        /* Proxy buttons hidden initially */
-        .proxy-buttons {
-            display: none; /* Initially hidden */
-            margin-top: 20px;
+        .button:hover {
+            background-color: #0056b3;
         }
-        .proxy-buttons button {
-            display: block; /* Stack buttons vertically */
-            margin: 5px auto;
-            width: 200px;
+        #proxyInput {
+            display: none;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
 
-    <div class="top-bar">
-        <button id="easyProxy">Easy Proxy</button>
-        <button id="proxy">Proxy</button>
-        <button id="megaProxy">Mega Proxy <span class="beta-tag">Beta</span></button>
+    <iframe id="blooketFrame" src="https://play.blooket.com/" title="Blooket"></iframe>
+
+    <img id="loading" src="https://media1.tenor.com/m/XasjKGMk_wAAAAAC/load-loading.gif" alt="Loading...">
+
+    <div id="proxyButtons" style="display:none;">
+        <button class="button" id="basicProxyButton">Basic Proxy</button>
+        <button class="button" id="freeProxyButton">Free Proxy</button>
+        <button class="button" id="megaProxyButton" style="display:none;">Mega Proxy</button>
     </div>
 
-    <iframe id="classroomFrame" src="https://www.blooket.com/"></iframe>
-
-    <!-- Secret Menu -->
-    <div class="secret-menu" id="secretMenu">
-        <h3>Secret Menu</h3>
-        <p>This is the secret menu content!</p>
-    </div>
-
-    <!-- Proxy Buttons -->
-    <div class="proxy-buttons" id="proxyButtons">
-        <button id="easyProxyButton">Easy Proxy</button>
-        <button id="proxyButton">Proxy</button>
-        <button id="megaProxyButton">Mega Proxy</button>
+    <div id="proxyInput">
+        <input type="text" id="urlInput" placeholder="Enter URL here" />
+        <button class="button" id="openIframeButton">Open Iframe in New Tab</button>
     </div>
 
     <script>
         document.addEventListener('keydown', function(event) {
-            // 'O' key to go to the real website
-            if (event.key === 'o') {
-                window.location.href = 'https://edu.google.com/';
-            }
-
-            // 'Tab' key to toggle secret menu and proxy buttons
-            if (event.key === 'Tab') {
-                event.preventDefault(); // Prevent default tabbing behavior
-                const secretMenu = document.getElementById('secretMenu');
-                const proxyButtons = document.getElementById('proxyButtons');
-
-                // Toggle visibility of secret menu and proxy buttons
-                secretMenu.style.display = secretMenu.style.display === 'none' ? 'block' : 'none';
-                proxyButtons.style.display = proxyButtons.style.display === 'none' ? 'block' : 'none';
+            if (event.key === 'Shift') {
+                document.getElementById('loading').style.display = 'block';
+                setTimeout(showButtons, 1000); // Delay to show loading GIF
             }
         });
 
-        // Easy Proxy button functionality
-        document.getElementById('easyProxyButton').addEventListener('click', function() {
-            let url = prompt("Enter a URL to access via Easy Proxy:");
+        function showButtons() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('proxyButtons').style.display = 'block';
+            document.getElementById('proxyInput').style.display = 'block';
+
+            const localStorageValue = localStorage.getItem('I');
+            if (localStorageValue && parseInt(localStorageValue) === 5) {
+                document.getElementById('megaProxyButton').style.display = 'inline-block';
+            }
+        }
+
+        document.getElementById('basicProxyButton').addEventListener('click', function() {
+            const url = prompt("Enter the URL to access (starting with http or https):");
             if (url) {
-                let newWindow = window.open("about:blank", "_blank");
-                newWindow.document.write(`<iframe src="${url}" style="width:100%; height:100%; border:none;"></iframe>`);
+                window.open(url + '/play', '_blank');
             }
         });
 
-        // Proxy button functionality
-        document.getElementById('proxyButton').addEventListener('click', function() {
-            let newWindow = window.open("about:blank", "_blank");
-            newWindow.document.write('<iframe src="https://www.proxysite.com" style="width:100%; height:100%; border:none;"></iframe>');
+        document.getElementById('freeProxyButton').addEventListener('click', function() {
+            const freeProxyFrame = document.createElement('iframe');
+            freeProxyFrame.src = 'https://proxysite.com';
+            document.body.appendChild(freeProxyFrame);
         });
 
-        // Mega Proxy button functionality
         document.getElementById('megaProxyButton').addEventListener('click', function() {
-            window.open("https://flipgrid.cf/", "_blank");
+            const megaProxyFrame = document.createElement('iframe');
+            megaProxyFrame.src = 'about:blank'; // Load about:blank initially
+            document.body.appendChild(megaProxyFrame);
+            megaProxyFrame.onload = function() {
+                const innerDoc = megaProxyFrame.contentDocument || megaProxyFrame.contentWindow.document;
+                innerDoc.body.innerHTML = '<iframe src="https://flipgrid.nf" style="width:100%; height:100%; border:none;"></iframe>';
+            };
+        });
+
+        document.getElementById('openIframeButton').addEventListener('click', function() {
+            const inputUrl = document.getElementById('urlInput').value;
+            if (inputUrl) {
+                window.open(inputUrl, '_blank');
+            } else {
+                alert("Please enter a valid URL.");
+            }
         });
     </script>
-
 </body>
 </html>
